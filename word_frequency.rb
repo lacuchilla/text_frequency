@@ -1,8 +1,20 @@
 class Words
+
+  def initialize
+    @words_searched = {}
+  end
   # filepath = ARGV[0]
-  def word_frequency(filepath = ARGV[0])
+  def word_frequency(filepath = ARGV[0], words_to_search = ARGV[1])
+    file = File.open(filepath, "r")
+    content = file.read
+    content.each_line do |line|
+      #save variable of each line, make it pass through regex to remove punctuation and newline characters
+      
+      puts line
+    end
+    # puts content
   # def word_frequency(text_documents)#words to look for
-    IO.foreach(filepath) {|x| print "GOT", x}
+    # IO.foreach(filepath) {|x| print "GOT", x}
   #create empty dictionary of words to look for
   #for each text document
   #open the document
