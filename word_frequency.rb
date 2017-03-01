@@ -3,34 +3,28 @@ class Words
   def initialize
     @words_searched = {}
   end
-  # filepath = ARGV[0]
+
   def word_frequency(args = ARGV[0..-1])
     filepath = []
     words_to_search = []
     arguments = args.to_a
     arguments.each do |a|
-      if a[-4..-1] == ".txt"
-        filepath << a
-      else
-        words_to_search << a
-      end
+      a[-4..-1] == ".txt" ? filepath << a : words_to_search << a
     end
-    # puts args
 
-    filepath = ARGV[0]
-    # filepath = ARGV[0], words_to_search = ARGV[1..-1]
-    # puts filepath
-    # filepath
     words_to_search.each do |word|
       @words_searched[word] = 0
     end
 
-    file = File.open(filepath, "r")
-    content = file.read
-    content.each_line do |line|
+    filepath.each do |f|
+      # file = File.open(f, "r")
+      content = File.readlines(f)
+      # content.each_line do |line|
+      content.each do |c|
       #save variable of each line, make it pass through regex to remove punctuation and newline characters
-
-      puts line
+        puts c
+        puts "BREAK"
+      end
     end
     puts @words_searched
     puts filepath
