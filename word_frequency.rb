@@ -4,8 +4,23 @@ class Words
     @words_searched = {}
   end
   # filepath = ARGV[0]
-  def word_frequency(filepath = ARGV[0], words_to_search = ARGV[1..-1])
-    puts filepath
+  def word_frequency(args = ARGV[0..-1])
+    filepath = []
+    words_to_search = []
+    arguments = args.to_a
+    arguments.each do |a|
+      if a[-4..-1] == ".txt"
+        filepath << a
+      else
+        words_to_search << a
+      end
+    end
+    # puts args
+
+    filepath = ARGV[0]
+    # filepath = ARGV[0], words_to_search = ARGV[1..-1]
+    # puts filepath
+    # filepath
     words_to_search.each do |word|
       @words_searched[word] = 0
     end
@@ -18,6 +33,8 @@ class Words
       puts line
     end
     puts @words_searched
+    puts filepath
+    puts words_to_search
     # puts content
   # def word_frequency(text_documents)#words to look for
     # IO.foreach(filepath) {|x| print "GOT", x}
