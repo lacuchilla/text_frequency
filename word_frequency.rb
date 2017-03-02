@@ -1,10 +1,11 @@
 class Words
 
-  def initialize
-    @words_searched = {}
-  end
+  # def initialize
+  #
+  # end
 
   def word_frequency(args = ARGV[0..-1])
+    words_searched = {}
     filepath = []
     words_to_search = []
     arguments = args.to_a
@@ -13,7 +14,7 @@ class Words
     end
 
     words_to_search.each do |word|
-      @words_searched[word] = 0
+      words_searched[word] = 0
     end
 
     filepath.each do |f|
@@ -21,12 +22,23 @@ class Words
       content = File.readlines(f)
       # content.each_line do |line|
       content.each do |c|
+
       #save variable of each line, make it pass through regex to remove punctuation and newline characters
-        puts c
-        puts "BREAK"
+        w = c.split(" ")
+        w.each do |here|
+          # regex = /\s/
+          x = here.gsub(/[-,.:;"]/, '')
+          if words_searched.key?(x)
+            words_searched[x] += 1
+            puts "yay"
+          else
+            next
+          end
+          puts x.downcase
+        end
       end
     end
-    puts @words_searched
+    puts words_searched
     puts filepath
     puts words_to_search
     # puts content
