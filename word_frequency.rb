@@ -5,52 +5,48 @@ class Words
   # end
 
   def word_frequency(args = ARGV[0..-1])
-    words_searched = {}
-    filepath = []
+    words_hash = {}
+    files_to_check = []
     words_to_search = []
     arguments = args.to_a
     arguments.each do |a|
-      a[-4..-1] == ".txt" ? filepath << a : words_to_search << a
+      a[-4..-1] == ".txt" ? files_to_check << a : words_to_search << a
     end
 
     words_to_search.each do |word|
-      words_searched[word] = 0
+      words_hash[word] = 0
     end
 
-    filepath.each do |f|
-      # file = File.open(f, "r")
-      content = File.readlines(f)
-      # content.each_line do |line|
-      content.each do |c|
+    files_to_check.each do |file|
+      words_hash.each do |key, value|
+        words_hash[key] = 0
+      end
 
-      #save variable of each line, make it pass through regex to remove punctuation and newline characters
-        w = c.split(" ")
-        w.each do |here|
-          # regex = /\s/
-          x = here.gsub(/[-,.:;"]/, '')
-          if words_searched.key?(x)
-            words_searched[x] += 1
-            puts "yay"
+
+
+
+      open_file = File.readlines(file)
+      open_file.each do |line|
+        word = line.split(" ")
+        word.each do |split_word|
+          cleaned_word = split_word.gsub(/[-,.:;"]/, '')
+          downcased_word = cleaned_word.downcase
+          if words_hash.key?(downcased_word)
+            words_hash[downcased_word] += 1
+            # puts "yay"
           else
             next
           end
-          puts x.downcase
+          # puts downcased_word
         end
       end
+      print words_hash
+
     end
-    puts words_searched
-    puts filepath
-    puts words_to_search
-    # puts content
-  # def word_frequency(text_documents)#words to look for
-    # IO.foreach(filepath) {|x| print "GOT", x}
-  #create empty dictionary of words to look for
-  #for each text document
-  #open the document
-  #strip out punctuation, separate by whitespace, convert text to lowercase
-  #save as the text that we'll checek
-  #for each word in the document
-  #if it's one of the words we're looking for, add it to the dictionary
+    # puts words_hash
+    # puts files_to_check
+    # puts words_to_search
+
   end
 end
 
