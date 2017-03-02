@@ -21,10 +21,7 @@ class Words
       words_hash.each do |key, value|
         words_hash[key] = 0
       end
-
-
-
-
+      
       open_file = File.readlines(file)
       open_file.each do |line|
         word = line.split(" ")
