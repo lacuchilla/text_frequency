@@ -21,13 +21,16 @@ class Words
       words_hash.each do |key, value|
         words_hash[key] = 0
       end
-      
+
       open_file = File.readlines(file)
       open_file.each do |line|
         word = line.split(" ")
         word.each do |split_word|
-          cleaned_word = split_word.gsub(/[-,.:;"]/, '')
+          cleaned_word = split_word.gsub(/[,.:;"?!]/, '')
           downcased_word = cleaned_word.downcase
+          if downcased_word[-1] == "-"
+            downcased_word.chomp!("-")
+          end
           if words_hash.key?(downcased_word)
             words_hash[downcased_word] += 1
             # puts "yay"
