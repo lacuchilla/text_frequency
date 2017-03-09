@@ -45,14 +45,14 @@ class Words
           if downcased_word[-1] == "-"
             downcased_word.chomp!("-")
           end
+          #this increments the count of the words in the current file by one
+          words_in_current_line += 1
           #this checks to see if the current word is a key that is in the words_hash. If it's there, we increment that key's value by 1, otherwise we move onto the next word in the line
           if words_hash.key?(downcased_word)
             words_hash[downcased_word] += 1
           else
             next
           end
-          #this increments the count of the words in the current file by one
-          words_in_current_line += 1
         end
         #once all of the words in the line have been read, the total is added to the word_count for that file.
         word_count += words_in_current_line
@@ -60,6 +60,8 @@ class Words
       #this returns each word searched and the text frequency for the word in the current file.
       puts "For #{file}:"
       words_hash.each do |key, value|
+        puts "Number of occurrences for #{key}: #{value}"
+        puts "Total number of words in the file: #{word_count}"
         text_frequency = words_hash[key]/word_count.to_f
         puts "Text frequency for #{key}: #{text_frequency}"
       end
